@@ -8,7 +8,7 @@ import {
   DialogTitle,
   DialogDescription,
 } from "@/components/ui/dialog";
-import { ScrollArea } from "@/components/ui/scroll-area";
+
 import { z } from "zod";
 import { PageHeader } from "@/components/page-header";
 import { Input } from "@/components/ui/input";
