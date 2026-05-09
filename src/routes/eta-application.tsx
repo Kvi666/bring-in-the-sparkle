@@ -269,12 +269,12 @@ function EtaApplicationPage() {
         }}
       >
         <DialogContent
-          className="max-w-2xl gap-0 p-0 sm:rounded-xl"
+          className="flex max-h-[90vh] max-w-2xl flex-col gap-0 p-0 sm:rounded-xl"
           onPointerDownOutside={(e) => e.preventDefault()}
           onEscapeKeyDown={(e) => e.preventDefault()}
           onInteractOutside={(e) => e.preventDefault()}
         >
-          <DialogHeader className="border-b p-6">
+          <DialogHeader className="shrink-0 border-b p-6">
             <DialogTitle className="text-xl">
               Please read the Terms &amp; Conditions before confirming your ETA application
             </DialogTitle>
@@ -282,7 +282,7 @@ function EtaApplicationPage() {
               Review the terms below. You must agree to continue with your application.
             </DialogDescription>
           </DialogHeader>
-          <ScrollArea className="max-h-[55vh] px-6 py-4">
+          <div className="min-h-0 flex-1 overflow-y-auto px-6 py-4">
             <div className="space-y-4 text-sm leading-relaxed text-foreground">
               <p>
                 I hereby certify that I have read and understood all the terms and conditions set
