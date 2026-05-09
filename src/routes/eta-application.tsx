@@ -350,8 +350,8 @@ function EtaApplicationPage() {
                 </p>
               </div>
             </div>
-          </ScrollArea>
-          <div className="sticky bottom-0 flex flex-col gap-4 border-t bg-background p-6 sm:flex-row sm:items-center sm:justify-between">
+          </div>
+          <div className="shrink-0 flex flex-col gap-4 border-t bg-background p-6 sm:flex-row sm:items-center sm:justify-between">
             <label className="flex cursor-pointer items-start gap-2 text-sm">
               <Checkbox
                 checked={termsAgreed}
