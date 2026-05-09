@@ -269,9 +269,9 @@ function EtaApplicationPage() {
                     <span
                       className={`grid h-7 w-7 place-items-center rounded-full text-xs font-semibold ${
                         active
-                          ? "bg-trust text-trust-foreground"
+                          ? "bg-trust text-white"
                           : done
-                            ? "bg-success text-success-foreground"
+                            ? "bg-success text-white"
                             : "bg-secondary text-foreground"
                       }`}
                     >
@@ -694,7 +694,7 @@ function EtaApplicationPage() {
                 <button
                   type="button"
                   onClick={next}
-                  className="inline-flex h-11 items-center rounded-lg bg-trust px-6 text-sm font-semibold text-trust-foreground hover:opacity-90"
+                  className="inline-flex h-11 items-center rounded-lg bg-trust px-6 text-sm font-semibold text-white hover:opacity-90"
                 >
                   Next <ArrowRight className="ml-1.5 h-4 w-4" />
                 </button>
