@@ -32,28 +32,32 @@ function VisaPage() {
 
       <section className="mx-auto max-w-7xl px-4 py-16">
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {visas.map(v => (
-            <article key={v.name} className="card-hover rounded-2xl border border-border bg-card p-6">
-              <div className="grid h-11 w-11 place-items-center rounded-xl bg-secondary text-trust">
-                <v.icon className="h-5 w-5" />
-              </div>
-              <h3 className="mt-5 font-display text-lg font-semibold">{v.name}</h3>
-              <p className="mt-1.5 text-sm text-muted-foreground">{v.desc}</p>
-              <dl className="mt-4 grid grid-cols-2 gap-3 text-xs">
-                <div className="rounded-lg bg-secondary p-3">
-                  <dt className="text-muted-foreground">Duration</dt>
-                  <dd className="mt-0.5 font-semibold text-foreground">{v.duration}</dd>
+          {visas.map(v => {
+            const isTourist = v.name === "Tourist Visa (ETA)";
+            const applyTo = isTourist ? "/eta-application" : "/appointment";
+            return (
+              <article key={v.name} className="card-hover rounded-2xl border border-border bg-card p-6">
+                <div className="grid h-11 w-11 place-items-center rounded-xl bg-secondary text-trust">
+                  <v.icon className="h-5 w-5" />
                 </div>
-                <div className="rounded-lg bg-secondary p-3">
-                  <dt className="text-muted-foreground">From</dt>
-                  <dd className="mt-0.5 font-semibold text-foreground">{v.price}</dd>
-                </div>
-              </dl>
-              <Link to="/appointment" className="mt-5 inline-flex items-center text-sm font-semibold text-trust">
-                Apply now <ArrowRight className="ml-1 h-4 w-4" />
-              </Link>
-            </article>
-          ))}
+                <h3 className="mt-5 font-display text-lg font-semibold">{v.name}</h3>
+                <p className="mt-1.5 text-sm text-muted-foreground">{v.desc}</p>
+                <dl className="mt-4 grid grid-cols-2 gap-3 text-xs">
+                  <div className="rounded-lg bg-secondary p-3">
+                    <dt className="text-muted-foreground">Duration</dt>
+                    <dd className="mt-0.5 font-semibold text-foreground">{v.duration}</dd>
+                  </div>
+                  <div className="rounded-lg bg-secondary p-3">
+                    <dt className="text-muted-foreground">From</dt>
+                    <dd className="mt-0.5 font-semibold text-foreground">{v.price}</dd>
+                  </div>
+                </dl>
+                <Link to={applyTo} className="mt-5 inline-flex items-center text-sm font-semibold text-trust">
+                  Apply now <ArrowRight className="ml-1 h-4 w-4" />
+                </Link>
+              </article>
+            );
+          })}
         </div>
       </section>
 
