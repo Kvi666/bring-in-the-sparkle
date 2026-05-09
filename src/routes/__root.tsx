@@ -9,6 +9,9 @@ import {
 } from "@tanstack/react-router";
 
 import appCss from "../styles.css?url";
+import { SiteHeader } from "@/components/site-header";
+import { SiteFooter } from "@/components/site-footer";
+import { I18nProvider } from "@/lib/i18n";
 
 function NotFoundComponent() {
   return (
@@ -72,20 +75,26 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "Department of Immigration & Emigration — Sri Lanka" },
+      { name: "description", content: "Official portal for passports, visa services, dual citizenship, and appointments. Secure, modern services for citizens and visitors of Sri Lanka." },
+      { name: "author", content: "Government of Sri Lanka" },
+      { name: "theme-color", content: "#1a2f5c" },
+      { property: "og:title", content: "Department of Immigration & Emigration — Sri Lanka" },
+      { property: "og:description", content: "Official portal for passports, visa services, dual citizenship, and appointments. Secure, modern services for citizens and visitors of Sri Lanka." },
       { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary" },
-      { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Department of Immigration & Emigration — Sri Lanka" },
+      { name: "twitter:description", content: "Official portal for passports, visa services, dual citizenship, and appointments. Secure, modern services for citizens and visitors of Sri Lanka." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/2df15032-8795-47bd-ae64-3644f80b788f/id-preview-0e56e182--efcc457a-0ebc-4b36-920a-9aa5202b083f.lovable.app-1778338732872.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/2df15032-8795-47bd-ae64-3644f80b788f/id-preview-0e56e182--efcc457a-0ebc-4b36-920a-9aa5202b083f.lovable.app-1778338732872.png" },
     ],
     links: [
-      {
-        rel: "stylesheet",
-        href: appCss,
-      },
+      { rel: "icon", type: "image/png", href: "/favicon.png" },
+      { rel: "apple-touch-icon", href: "/favicon.png" },
+      { rel: "stylesheet", href: appCss },
+      { rel: "preconnect", href: "https://fonts.googleapis.com" },
+      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
+      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" },
     ],
   }),
   shellComponent: RootShell,
@@ -113,7 +122,14 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <Outlet />
+      <I18nProvider>
+        <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[100] focus:bg-primary focus:text-primary-foreground focus:px-3 focus:py-2 focus:rounded-md">Skip to content</a>
+        <SiteHeader />
+        <main id="main">
+          <Outlet />
+        </main>
+        <SiteFooter />
+      </I18nProvider>
     </QueryClientProvider>
   );
 }
