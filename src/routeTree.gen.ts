@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as VisaRouteImport } from './routes/visa'
 import { Route as PassportRouteImport } from './routes/passport'
 import { Route as NewsRouteImport } from './routes/news'
+import { Route as EtaApplicationRouteImport } from './routes/eta-application'
 import { Route as DualCitizenshipRouteImport } from './routes/dual-citizenship'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as AppointmentRouteImport } from './routes/appointment'
@@ -30,6 +31,11 @@ const PassportRoute = PassportRouteImport.update({
 const NewsRoute = NewsRouteImport.update({
   id: '/news',
   path: '/news',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EtaApplicationRoute = EtaApplicationRouteImport.update({
+  id: '/eta-application',
+  path: '/eta-application',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DualCitizenshipRoute = DualCitizenshipRouteImport.update({
@@ -58,6 +64,7 @@ export interface FileRoutesByFullPath {
   '/appointment': typeof AppointmentRoute
   '/contact': typeof ContactRoute
   '/dual-citizenship': typeof DualCitizenshipRoute
+  '/eta-application': typeof EtaApplicationRoute
   '/news': typeof NewsRoute
   '/passport': typeof PassportRoute
   '/visa': typeof VisaRoute
@@ -67,6 +74,7 @@ export interface FileRoutesByTo {
   '/appointment': typeof AppointmentRoute
   '/contact': typeof ContactRoute
   '/dual-citizenship': typeof DualCitizenshipRoute
+  '/eta-application': typeof EtaApplicationRoute
   '/news': typeof NewsRoute
   '/passport': typeof PassportRoute
   '/visa': typeof VisaRoute
@@ -77,6 +85,7 @@ export interface FileRoutesById {
   '/appointment': typeof AppointmentRoute
   '/contact': typeof ContactRoute
   '/dual-citizenship': typeof DualCitizenshipRoute
+  '/eta-application': typeof EtaApplicationRoute
   '/news': typeof NewsRoute
   '/passport': typeof PassportRoute
   '/visa': typeof VisaRoute
@@ -88,6 +97,7 @@ export interface FileRouteTypes {
     | '/appointment'
     | '/contact'
     | '/dual-citizenship'
+    | '/eta-application'
     | '/news'
     | '/passport'
     | '/visa'
@@ -97,6 +107,7 @@ export interface FileRouteTypes {
     | '/appointment'
     | '/contact'
     | '/dual-citizenship'
+    | '/eta-application'
     | '/news'
     | '/passport'
     | '/visa'
@@ -106,6 +117,7 @@ export interface FileRouteTypes {
     | '/appointment'
     | '/contact'
     | '/dual-citizenship'
+    | '/eta-application'
     | '/news'
     | '/passport'
     | '/visa'
@@ -116,6 +128,7 @@ export interface RootRouteChildren {
   AppointmentRoute: typeof AppointmentRoute
   ContactRoute: typeof ContactRoute
   DualCitizenshipRoute: typeof DualCitizenshipRoute
+  EtaApplicationRoute: typeof EtaApplicationRoute
   NewsRoute: typeof NewsRoute
   PassportRoute: typeof PassportRoute
   VisaRoute: typeof VisaRoute
@@ -142,6 +155,13 @@ declare module '@tanstack/react-router' {
       path: '/news'
       fullPath: '/news'
       preLoaderRoute: typeof NewsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/eta-application': {
+      id: '/eta-application'
+      path: '/eta-application'
+      fullPath: '/eta-application'
+      preLoaderRoute: typeof EtaApplicationRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/dual-citizenship': {
@@ -180,6 +200,7 @@ const rootRouteChildren: RootRouteChildren = {
   AppointmentRoute: AppointmentRoute,
   ContactRoute: ContactRoute,
   DualCitizenshipRoute: DualCitizenshipRoute,
+  EtaApplicationRoute: EtaApplicationRoute,
   NewsRoute: NewsRoute,
   PassportRoute: PassportRoute,
   VisaRoute: VisaRoute,
@@ -187,13 +208,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
