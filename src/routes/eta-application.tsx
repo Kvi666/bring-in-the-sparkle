@@ -260,6 +260,119 @@ function EtaApplicationPage() {
 
   return (
     <>
+      <Dialog
+        open={termsOpen}
+        onOpenChange={(o) => {
+          // Prevent dismissing without acceptance
+          if (!o && !termsAgreed) return;
+          setTermsOpen(o);
+        }}
+      >
+        <DialogContent
+          className="max-w-2xl gap-0 p-0 sm:rounded-xl"
+          onPointerDownOutside={(e) => e.preventDefault()}
+          onEscapeKeyDown={(e) => e.preventDefault()}
+          onInteractOutside={(e) => e.preventDefault()}
+        >
+          <DialogHeader className="border-b p-6">
+            <DialogTitle className="text-xl">
+              Please read the Terms &amp; Conditions before confirming your ETA application
+            </DialogTitle>
+            <DialogDescription>
+              Review the terms below. You must agree to continue with your application.
+            </DialogDescription>
+          </DialogHeader>
+          <ScrollArea className="max-h-[55vh] px-6 py-4">
+            <div className="space-y-4 text-sm leading-relaxed text-foreground">
+              <p>
+                I hereby certify that I have read and understood all the terms and conditions set
+                forth in this application and all the information I have furnished in this form
+                are true and accurate to the best of my knowledge and belief.
+              </p>
+              <p>
+                I understand that any false or misleading statement may result in the permanent
+                refusal of an ETA or denial of entry into Sri Lanka. I understand that possession
+                of an ETA does not entitle me to enter Sri Lanka upon arrival at a port of entry
+                if I am found inadmissible.
+              </p>
+              <div>
+                <h4 className="font-semibold">1. All ETA holders should be able to prove:</h4>
+                <ul className="ml-5 list-disc space-y-1">
+                  <li>A round trip ticket to show at the port of entry in Sri Lanka (only if traveling by air)</li>
+                  <li>Evidence of sufficient funds to cover expenses in Sri Lanka</li>
+                </ul>
+              </div>
+              <div>
+                <h4 className="font-semibold">2. Employment</h4>
+                <p>
+                  Holder of ETA should not engage in any form of employment, paid or unpaid, or in
+                  any trade or business other than specified in the ETA during the stay period.
+                </p>
+              </div>
+              <div>
+                <h4 className="font-semibold">3. Fees and Payments</h4>
+                <p>
+                  You agree that your credit card(s) will be billed immediately after submission
+                  of your application. ETA processing fees are non-refundable and non-transferable.
+                </p>
+              </div>
+              <div>
+                <h4 className="font-semibold">4. Communication</h4>
+                <p>
+                  By using this site, you authorize the Department of Immigration &amp; Emigration
+                  Sri Lanka to contact you via email, messaging, or other communication methods.
+                </p>
+              </div>
+              <div>
+                <h4 className="font-semibold">5. Accuracy</h4>
+                <p>
+                  By submitting your application, you certify that all provided information is
+                  true and correct.
+                </p>
+              </div>
+              <div>
+                <h4 className="font-semibold">6. Limitations of Use</h4>
+                <p>You may not use this site for any purpose other than its intended purpose.</p>
+              </div>
+              <div>
+                <h4 className="font-semibold">7. Application Submitting Terms</h4>
+                <ul className="ml-5 list-disc space-y-1">
+                  <li>Passport number must be entered correctly</li>
+                  <li>Nationality must match the travel document</li>
+                  <li>Date of birth must be entered correctly</li>
+                  <li>Applicants must recheck all entered information carefully</li>
+                  <li>Incorrect information may require paying for the visa again on arrival</li>
+                </ul>
+                <p className="mt-2">
+                  You must also ensure that the same travel document used for the online visa
+                  application is used when entering Sri Lanka. If a different travel document is
+                  presented, visa payment may be required again upon arrival.
+                </p>
+              </div>
+            </div>
+          </ScrollArea>
+          <div className="sticky bottom-0 flex flex-col gap-4 border-t bg-background p-6 sm:flex-row sm:items-center sm:justify-between">
+            <label className="flex cursor-pointer items-start gap-2 text-sm">
+              <Checkbox
+                checked={termsAgreed}
+                onCheckedChange={(v) => setTermsAgreed(v === true)}
+                className="mt-0.5"
+              />
+              <span>I have read and agree to the Terms &amp; Conditions</span>
+            </label>
+            <div className="flex gap-2 sm:justify-end">
+              <Button type="button" variant="outline" onClick={() => navigate({ to: "/visa" })}>
+                Cancel
+              </Button>
+              <Button type="button" disabled={!termsAgreed} onClick={acceptTerms}>
+                Continue
+              </Button>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      <div aria-hidden={termsOpen} className={termsOpen ? "pointer-events-none select-none" : ""}>
       <PageHeader
         eyebrow="Tourist Visa (ETA)"
         title="Sri Lanka ETA Application"
