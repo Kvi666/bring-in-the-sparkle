@@ -162,7 +162,19 @@ function EtaApplicationPage() {
   const [data, setData] = useState(initial);
   const [errors, setErrors] = useState<Errors>({});
   const [step, setStep] = useState(0);
+  const [termsOpen, setTermsOpen] = useState(false);
+  const [termsAgreed, setTermsAgreed] = useState(false);
 
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const accepted = sessionStorage.getItem("eta-terms-accepted") === "1";
+    if (!accepted) setTermsOpen(true);
+  }, []);
+
+  const acceptTerms = () => {
+    sessionStorage.setItem("eta-terms-accepted", "1");
+    setTermsOpen(false);
+  };
   const set = <K extends keyof typeof initial>(k: K, v: (typeof initial)[K]) => {
     setData((d) => ({ ...d, [k]: v }));
     setErrors((e) => ({ ...e, [k]: undefined }));
