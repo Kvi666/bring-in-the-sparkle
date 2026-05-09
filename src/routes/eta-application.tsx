@@ -844,6 +844,7 @@ function EtaApplicationPage() {
           </div>
         </form>
       </section>
+      </div>
     </>
   );
 }
